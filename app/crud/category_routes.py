@@ -1,5 +1,7 @@
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status , Depends
 from app.database import execute_query
+from app.auth.admin_guard import admin_required
+
 import logging
 
 router = APIRouter(
@@ -82,7 +84,7 @@ def search_categories(name: str = ""):
 # ADD category
 # ============================================================
 
-@router.post("/", status_code=status.HTTP_201_CREATED)
+@router.post("/", status_code=status.HTTP_201_CREATED , dependencies=[Depends(admin_required)])
 def add_category(
     name: str,
     description: str = "",
@@ -129,7 +131,7 @@ def add_category(
 # UPDATE category
 # ============================================================
 
-@router.put("/{category_id}", status_code=status.HTTP_200_OK)
+@router.put("/{category_id}", status_code=status.HTTP_200_OK , dependencies=[Depends(admin_required)])
 def update_category(
     category_id: int,
     name: str,
@@ -181,7 +183,7 @@ def update_category(
 # DELETE category
 # ============================================================
 
-@router.delete("/{category_id}", status_code=status.HTTP_200_OK)
+@router.delete("/{category_id}", status_code=status.HTTP_200_OK , dependencies=[Depends(admin_required)])
 def delete_category(category_id: int):
     """
     Supprimer une catégorie

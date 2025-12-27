@@ -1,29 +1,4 @@
-
-
-services : 
-  sales_db: 
-    image: postgres:16-alpine
-    environment: 
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=root123
-      - POSTGRES_DB=sales_db
-    ports : 
-      - "5432:5432" 
-    volumes: 
-      - pgdata:/var/lib/postgresql/data
-      - ./sql:/docker-entrypoint-initdb.d
-
-    healthcheck:
-      test: ["CMD-SHELL"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    restart: unless-stopped
-    networks:
-        - sales_network 
-    
-volumes:
-  pgdata:services:
+services:
   sales_db:
     image: postgres:16-alpine
     container_name: sales_db
@@ -35,6 +10,7 @@ volumes:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./sql:/docker-entrypoint-initdb.d
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U admin"]
       interval: 10s
@@ -43,7 +19,6 @@ volumes:
     restart: unless-stopped
     networks:
       - sales_network
-
   api:
     build: .
     container_name: sales_api
@@ -62,16 +37,8 @@ volumes:
     restart: unless-stopped
     networks:
       - sales_network
-
 volumes:
   pgdata:
-
-networks:
-  sales_network:
-    driver: bridge
-    name: sales_network
-
-
 networks:
   sales_network:
     driver: bridge

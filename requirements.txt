@@ -12,3 +12,12 @@ starlette==0.50.0
 typing-inspection==0.4.2
 typing_extensions==4.15.0
 uvicorn==0.38.0
+bcrypt==4.1.2
+
+# Add these missing dependencies
+python-jose[cryptography]==3.3.0
+passlib==1.7.4
+sqlalchemy==2.0.25
+python-multipart==0.0.6
+pydantic-settings==2.1.0
+cryptography==41.0.7
