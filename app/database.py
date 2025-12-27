@@ -19,7 +19,7 @@ def get_connection():
     """
     return psycopg.connect(**DB_CONFIG)
 
-print(get_connection())
+
 
 def execute_query(query, params=None):
     """
