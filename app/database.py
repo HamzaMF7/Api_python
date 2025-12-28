@@ -5,7 +5,7 @@ import psycopg
 
 # Paramètres de connexion (identiques au docker-compose.yml)
 DB_CONFIG = {
-    "host": "localhost",
+    "host": "sales_db",
     "port": 5432,
     "dbname": "sales_db",
     "user": "admin",

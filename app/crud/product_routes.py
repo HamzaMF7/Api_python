@@ -28,7 +28,9 @@ def get_product_by_id(product_id: int):
         sql = "SELECT * FROM get_product_by_id(%s);"
         result = execute_query(sql, (product_id,))
 
-    except Exception :
+
+    except Exception as e:
+        logger.error(f"Error fetching product {product_id}: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Erreur serveur lors de la récupération du produit"
