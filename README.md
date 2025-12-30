@@ -50,7 +50,7 @@ Avant de commencer, assurez-vous d'avoir installé :
 
 ```bash
 git clone https://github.com/HamzaMF7/Api_python.git
-cd python_app
+cd Api_python
 ```
 
 ### 2️⃣ Lancer l'environnement
